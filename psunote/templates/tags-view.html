@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Tag: {{ tag_name }}{% endblock %}
+{% block body %}
+<ul class="nav justify-content-center" style="padding-top: 1em;">
+  <li class="nav-item">
+    <a class="btn btn-info" href="{{ url_for('index') }}">Home</a>
+  </li>
+  <li class="nav-item">
+    <span class="btn btn-outline-secondary">{{ tag_name }}</span>
+  </li>
+</ul>
+
+{% for note in notes %}
+<div class="card my-3 border-0 shadow">
+  <div class="card-body">
+    <h4 class="card-title text-primary">{{ note.title }}</h4>
+    <p class="card-text">{{ note.description }}</p>
+    <div class="text-muted">
+      <strong>Tags:</strong> 
+      {% for t in note.tags %}
+        <span class="badge bg-success">{{ t.name }}</span>
+      {% endfor %}
+      <br>
+      <small>Last updated: {{ note.updated_date }}</small>
+    </div>
+  </div>
+</div>
+{% endfor %}
+{% endblock %}
